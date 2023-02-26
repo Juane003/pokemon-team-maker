@@ -62,13 +62,14 @@ const colors = {
   fairy: "#FF76FF",
 };
 
-export const getGradientBgFromTypes = (type) => {
-  if (type.length === 1)
-    return `linear(to-r, ${colors[type[0].type.name as PokemonType]}, ${
-      colors[type[0].type.name as PokemonType]
-    })`;
-  const firstColor = colors[type[0].type.name as PokemonType];
-  const secondColor = colors[type[1].type.name as PokemonType];
+export const getGradientBgFromTypes = (
+  firstType: PokemonType,
+  secondType: PokemonType | undefined
+) => {
+  if (secondType === undefined)
+    return `linear(to-r, ${colors[firstType]}, ${colors[firstType]})`;
+  const firstColor = colors[firstType];
+  const secondColor = colors[secondType];
   return `linear(to-r, ${firstColor}, ${secondColor})`;
 };
 

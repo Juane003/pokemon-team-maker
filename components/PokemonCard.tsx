@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PokemonTeam } from "@/types/types";
+import { PokemonTeam, PokemonType } from "@/types/types";
 import {
   Box,
   Card,
@@ -32,7 +32,10 @@ export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   if (isError) return <div>Error on fetch</div>;
   if (!data) return null;
 
-  const getBgColor = getGradientBgFromTypes(data.types);
+  const getBgColor = getGradientBgFromTypes(
+    data.types[0].type.name as PokemonType,
+    data.types[1]?.type.name as PokemonType | undefined
+  );
   return (
     <Card w={72} bgGradient={getBgColor}>
       <CloseButton onClick={() => handleRemovePokemon(pokemon)} />
